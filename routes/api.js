@@ -28,8 +28,9 @@ router.get('/', (req, res) => {
 /* GET  */
 router.get('/users', authorization, asyncHandler(async (req, res) => {
 //Returns the currently authenticated user
-  const users = await User.findAll({
-    attributes: { exclude: ['password', 'createdAt', 'updatedAt']}
+  const users = await User.findOne({
+    attributes: { exclude: ['password', 'createdAt', 'updatedAt']},
+    where: { emailAddress: req.currentUser.emailAddress }
   });
   res.status(200).json(users);
 }));
@@ -44,7 +45,7 @@ router.post('/users', userValidator, asyncHandler(async (req, res) => {
   try {
     const user = await User.create(req.body);
     res.location('/');
-    res.status(201).send('Successfuly created User');
+    res.status(201).json(user);
   } catch (error) {
       const err = new Error('That Email is already in use');
       err.status = 400;

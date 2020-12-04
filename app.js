@@ -4,7 +4,6 @@
 const express = require('express');
 const morgan = require('morgan');
 var cors = require('cors');
-const bodyParser = require('body-parser')
 // variable to enable global error logging
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
 

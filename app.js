@@ -26,7 +26,7 @@ app.use(express.json());
 		console.log('ERROR in establishing connection');
 	}
 
-	await db.sequelize.sync({ force: true });
+	await db.sequelize.sync();
 })();
 
 const apiRoutes = require('./routes/api');
